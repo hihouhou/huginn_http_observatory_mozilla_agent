@@ -143,8 +143,14 @@ module Agents
       if interpolated['changes_only'] == 'true'
         if payload.to_s != memory['last_status']
           if !memory['last_status'].nil?
-            if payload['score'] != memory['last_status']['score']
+            last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
+            last_status = JSON.parse(last_status)
+            if payload['grade'] != last_status['grade']
               create_event payload: payload
+            else
+              if interpolated['debug'] == 'true'
+                log "equal, so nothing to do"
+              end
             end
           else
             create_event payload: payload
