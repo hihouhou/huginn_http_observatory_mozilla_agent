@@ -145,15 +145,13 @@ module Agents
           if !memory['last_status'].nil?
             last_status = memory['last_status'].gsub("=>", ": ").gsub(": nil", ": null")
             last_status = JSON.parse(last_status)
-            if payload['grade'] != last_status['grade']
+            if payload['score'] != last_status['score'] && payload['status_code'] == 200
               create_event payload: payload
-            else
-              if interpolated['debug'] == 'true'
-                log "equal, so nothing to do"
-              end
             end
           else
-            create_event payload: payload
+            if payload['status_code'] == 200
+              create_event payload: payload
+            end
           end
           memory['last_status'] = payload.to_s
         end
