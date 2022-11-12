@@ -128,7 +128,12 @@ module Agents
       if interpolated['debug'] == 'true'
         log payload
       end
-      return payload
+
+      if payload['error'] == 'database-down'
+        error("Unable to connect to database")
+      else
+        return payload
+      end
     end
 
     def check_status()
