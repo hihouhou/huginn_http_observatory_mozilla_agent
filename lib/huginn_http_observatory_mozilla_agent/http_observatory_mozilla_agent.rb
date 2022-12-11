@@ -141,7 +141,7 @@ module Agents
       if interpolated['debug'] == 'true'
         log payload['state']
       end
-      if payload['state'] == 'PENDING'
+      while payload['state'] != 'FINISHED'
         sleep(30)
         payload = check_site()
       end
