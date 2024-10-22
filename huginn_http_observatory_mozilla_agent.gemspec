@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = "huginn_http_observatory_mozilla_agent"
-  spec.version       = '0.5'
+  spec.version       = '0.5.1'
   spec.authors       = ["Nicolas Germain"]
   spec.email         = ["ngermain@hihouhou.com"]
 
